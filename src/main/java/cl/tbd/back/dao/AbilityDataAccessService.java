@@ -12,7 +12,7 @@ import org.sql2o.Sql2o;
 import cl.tbd.back.model.Ability;
 
 @Repository("postgresAbility")
-public class AbilityDataAccessService implements AbilityDao{
+public class AbilityDataAccessService implements AbilityDao {
 
     @Autowired
     private Sql2o sql2o;
@@ -21,7 +21,10 @@ public class AbilityDataAccessService implements AbilityDao{
     public int insertAbility(UUID id, Ability ability) {
         final String sql = "INSERT INTO abilities (id, description) VALUES (:id, :description)";
         try (Connection con = sql2o.open()) {
-            con.createQuery(sql).addParameter("id", id).addParameter("description", ability.getName()).executeUpdate();
+            con.createQuery(sql)
+                .addParameter("id", id)
+                .addParameter("description", ability.getName())
+                .executeUpdate();
             return 0;
         }
     }
@@ -30,7 +33,8 @@ public class AbilityDataAccessService implements AbilityDao{
     public List<Ability> selectAllAbilities() {
         final String sql = "SELECT id, description FROM abilities";
         try (Connection con = sql2o.open()) {
-            return con.createQuery(sql).executeAndFetch(Ability.class);
+            return con.createQuery(sql)
+                .executeAndFetch(Ability.class);
         }
     }
 
@@ -38,9 +42,9 @@ public class AbilityDataAccessService implements AbilityDao{
     public Optional<Ability> selectAbilityById(UUID id) {
         final String sql = "SELECT id, description FROM abilities WHERE id = :searchId";
         try (Connection con = sql2o.open()) {
-            Optional<Ability> ability = con.createQuery(sql).addParameter("searchId", id)
-                    .executeAndFetch(Ability.class).stream().findFirst();
-            return ability;
+            return con.createQuery(sql)
+                .addParameter("searchId", id)
+                .executeAndFetch(Ability.class).stream().findFirst();
         }
     }
 
@@ -48,7 +52,10 @@ public class AbilityDataAccessService implements AbilityDao{
     public int updateAbilityDescriptionById(UUID id, Ability ability) {
         final String sql = "UPDATE abilities SET description = :description WHERE id = :id";
         try (Connection con = sql2o.open()) {
-            con.createQuery(sql).addParameter("id", id).addParameter("description", ability.getName()).executeUpdate();
+            con.createQuery(sql)
+                .addParameter("id", id)
+                .addParameter("description", ability.getName())
+                .executeUpdate();
             return 0;
         }
     }

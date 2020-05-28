@@ -21,7 +21,10 @@ public class InstitutionDataAccessService implements InstitutionDao{
     public int insertInstitution(UUID id, Institution institution) {
         final String sql = "INSERT INTO institutions (id, name) VALUES (:id, :name)";
         try (Connection con = sql2o.open()) {
-            con.createQuery(sql).addParameter("id", id).addParameter("name", institution.getName()).executeUpdate();
+            con.createQuery(sql)
+                .addParameter("id", id)
+                .addParameter("name", institution.getName())
+                .executeUpdate();
             return 0;
         }
     }
@@ -30,7 +33,8 @@ public class InstitutionDataAccessService implements InstitutionDao{
     public List<Institution> selectAllInstitutions() {
         final String sql = "SELECT id, name FROM institutions";
         try (Connection con = sql2o.open()) {
-            return con.createQuery(sql).executeAndFetch(Institution.class);
+            return con.createQuery(sql)
+            .executeAndFetch(Institution.class);
         }
     }
 
@@ -38,9 +42,9 @@ public class InstitutionDataAccessService implements InstitutionDao{
     public Optional<Institution> selectInstitutionById(UUID id) {
         final String sql = "SELECT id, name FROM institutions WHERE id = :searchId";
         try (Connection con = sql2o.open()) {
-            Optional<Institution> institution = con.createQuery(sql).addParameter("searchId", id)
-                    .executeAndFetch(Institution.class).stream().findFirst();
-            return institution;
+            return con.createQuery(sql)
+                .addParameter("searchId", id)
+                .executeAndFetch(Institution.class).stream().findFirst();
         }
     }
 
@@ -48,7 +52,10 @@ public class InstitutionDataAccessService implements InstitutionDao{
     public int updateInstitutionNameById(UUID id, Institution institution) {
         final String sql = "UPDATE institutions SET name = :name WHERE id = :id";
         try (Connection con = sql2o.open()) {
-            con.createQuery(sql).addParameter("id", id).addParameter("name", institution.getName()).executeUpdate();
+            con.createQuery(sql)
+                .addParameter("id", id)
+                .addParameter("name", institution.getName())
+                .executeUpdate();
             return 0;
         }
     }

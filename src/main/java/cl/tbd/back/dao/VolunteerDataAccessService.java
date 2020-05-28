@@ -21,7 +21,10 @@ public class VolunteerDataAccessService implements VolunteerDao{
     public int insertVolunteer(UUID id, Volunteer volunteer) {
         final String sql = "INSERT INTO volunteers (id, name) VALUES (:id, :name)";
         try (Connection con = sql2o.open()) {
-            con.createQuery(sql).addParameter("id", id).addParameter("name", volunteer.getName()).executeUpdate();
+            con.createQuery(sql)
+                .addParameter("id", id)
+                .addParameter("name", volunteer.getName())
+                .executeUpdate();
             return 0;
         }
     }
@@ -30,7 +33,8 @@ public class VolunteerDataAccessService implements VolunteerDao{
     public List<Volunteer> selectAllVolunteers() {
         final String sql = "SELECT id, name FROM volunteers";
         try (Connection con = sql2o.open()) {
-            return con.createQuery(sql).executeAndFetch(Volunteer.class);
+            return con.createQuery(sql)
+                .executeAndFetch(Volunteer.class);
         }
     }
 
@@ -38,9 +42,9 @@ public class VolunteerDataAccessService implements VolunteerDao{
     public Optional<Volunteer> selectVolunteerById(UUID id) {
         final String sql = "SELECT id, name FROM volunteers WHERE id = :searchId";
         try (Connection con = sql2o.open()) {
-            Optional<Volunteer> volunteer = con.createQuery(sql).addParameter("searchId", id)
-                    .executeAndFetch(Volunteer.class).stream().findFirst();
-            return volunteer;
+            return con.createQuery(sql)
+                .addParameter("searchId", id)
+                .executeAndFetch(Volunteer.class).stream().findFirst();
         }
     }
 
@@ -48,7 +52,10 @@ public class VolunteerDataAccessService implements VolunteerDao{
     public int updateVolunteerNameById(UUID id, Volunteer volunteer) {
         final String sql = "UPDATE volunteers SET name = :name WHERE id = :id";
         try (Connection con = sql2o.open()) {
-            con.createQuery(sql).addParameter("id", id).addParameter("name", volunteer.getName()).executeUpdate();
+            con.createQuery(sql)
+                .addParameter("id", id)
+                .addParameter("name", volunteer.getName())
+                .executeUpdate();
             return 0;
         }
     }
