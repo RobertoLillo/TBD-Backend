@@ -18,7 +18,7 @@ public class Volunteer {
         this.name = name;
     }
 
-    public UUID getID() {
+    public UUID getId() {
         return id;
     }
 

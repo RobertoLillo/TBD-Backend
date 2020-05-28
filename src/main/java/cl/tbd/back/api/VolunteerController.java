@@ -36,7 +36,7 @@ public class VolunteerController {
     }
 
     @GetMapping("/api/v1/volunteers")
-    public List<Volunteer> selectAllVolunteer() {
+    public List<Volunteer> selectAllVolunteers() {
         return volunteerService.selectAllVolunteers();
     }
 
@@ -53,6 +53,13 @@ public class VolunteerController {
     @DeleteMapping("/api/v1/volunteers/{id}")
     public void deleteVolunteerById(@PathVariable("id") UUID id) {
         volunteerService.deleteVolunteer(id);
+    }
+
+    // Others
+
+    @GetMapping("/api/v1/volunteers/byAbility/{id}")
+    public List<Volunteer> selectAllVolunteersByAbility(@PathVariable("id") UUID id) {
+        return volunteerService.selectAllVolunteersByAbility(id);
     }
 
 }

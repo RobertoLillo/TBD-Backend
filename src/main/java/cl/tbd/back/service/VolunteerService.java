@@ -41,4 +41,8 @@ public class VolunteerService {
         return volunteerDao.deleteVolunteerById(id);
     }
 
+    public List<Volunteer> selectAllVolunteersByAbility(UUID id) {
+        return volunteerDao.selectAllVolunteersByAbility(id);
+    }
+
 }

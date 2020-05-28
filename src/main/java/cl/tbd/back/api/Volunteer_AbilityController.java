@@ -39,11 +39,6 @@ public class Volunteer_AbilityController {
         return volunteer_abilityService.selectAllVolunteers_Abilities();
     }
 
-    @GetMapping("/api/v1/volunteers_abilities/{id}")
-    public Volunteer_Ability selectVolunteer_AbilityById(@PathVariable("id") UUID id) {
-        return volunteer_abilityService.selectVolunteer_AbilityById(id).orElse(null);
-    }
-
     @DeleteMapping("/api/v1/volunteers_abilities/{id}")
     public void deleteVolunteer_AbilityById(@PathVariable("id") UUID id) {
         volunteer_abilityService.deleteVolunteer_AbilityById(id);

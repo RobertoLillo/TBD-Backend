@@ -1,7 +1,6 @@
 package cl.tbd.back.dao;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,16 +35,6 @@ public class Volunteer_AbilityDataAccessService implements Volunteer_AbilityDao 
         try (Connection con = sql2o.open()) {
             return con.createQuery(sql)
                 .executeAndFetch(Volunteer_Ability.class);
-        }
-    }
-
-    @Override
-    public Optional<Volunteer_Ability> selectVolunteer_AbilityById(UUID id) {
-        final String sql = "SELECT id, id_volunteer, id_ability FROM volunteers_abilities WHERE id = :searchId";
-        try (Connection con = sql2o.open()) {
-            return con.createQuery(sql)
-                .addParameter("searchId", id)
-                .executeAndFetch(Volunteer_Ability.class).stream().findFirst();
         }
     }
 

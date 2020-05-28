@@ -1,7 +1,6 @@
 package cl.tbd.back.dao;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 import cl.tbd.back.model.Volunteer_Ability;
@@ -16,8 +15,6 @@ public interface Volunteer_AbilityDao {
     }
 
     List<Volunteer_Ability> selectAllVolunteers_Abilities();
-
-    Optional<Volunteer_Ability> selectVolunteer_AbilityById(UUID id);
 
     int deleteVolunteer_AbilityById(UUID id);
 

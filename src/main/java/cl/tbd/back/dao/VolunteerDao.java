@@ -23,4 +23,6 @@ public interface VolunteerDao {
 
     int deleteVolunteerById(UUID id);
 
+    List<Volunteer> selectAllVolunteersByAbility(UUID idAbility);
+
 }
