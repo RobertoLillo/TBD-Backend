@@ -1,4 +1,4 @@
-package cl.tbd.back.dao;
+package cl.tbd.back.dao.das;
 
 import java.util.List;
 import java.util.Optional;
@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 
+import cl.tbd.back.dao.InstitutionDao;
 import cl.tbd.back.model.Institution;
 
 @Repository("postgresInstitution")

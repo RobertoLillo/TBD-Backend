@@ -1,4 +1,4 @@
-package cl.tbd.back.dao;
+package cl.tbd.back.dao.das;
 
 import java.util.List;
 import java.util.UUID;
@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 
+import cl.tbd.back.dao.Volunteer_AbilityDao;
 import cl.tbd.back.model.Volunteer_Ability;
 
 @Repository("postgresVolunteer_Ability")
