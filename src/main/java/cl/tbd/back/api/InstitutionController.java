@@ -7,19 +7,19 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import cl.tbd.back.model.Institution;
 import cl.tbd.back.service.InstitutionService;
 
-@RequestMapping("api/v1/institutions")
+@CrossOrigin
 @RestController
 public class InstitutionController {
     
@@ -30,27 +30,27 @@ public class InstitutionController {
         this.institutionService = institutionService;
     }
 
-    @PostMapping
+    @PostMapping("/api/v1/institutions")
     public void insertInstitution(@RequestBody Institution institution) {
         institutionService.insertInstitution(institution);
     }
 
-    @GetMapping
+    @GetMapping("/api/v1/institutions")
     public List<Institution> selectAllInstitution() {
         return institutionService.selectAllInstitutions();
     }
 
-    @GetMapping(path = "{id}")
+    @GetMapping("/api/v1/institutions/{id}")
     public Institution selectInstitutionById(@PathVariable("id") UUID id) {
         return institutionService.selectInstitutionById(id).orElse(null);
     }
 
-    @PutMapping(path = "{id}")
+    @PutMapping("/api/v1/institutions/{id}")
     public void updateInstitutionNameById(@PathVariable("id") UUID id, @Valid @NonNull Institution institution) {
         institutionService.updateInstitutionNameById(id, institution);
     }
 
-    @DeleteMapping(path = "{id}")
+    @DeleteMapping("/api/v1/institutions/{id}")
     public void deleteInstitutionById(@PathVariable("id") UUID id) {
         institutionService.deleteInstitution(id);
     }
