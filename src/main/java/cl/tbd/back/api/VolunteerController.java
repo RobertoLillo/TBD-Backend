@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import cl.tbd.back.model.Volunteer;
 import cl.tbd.back.service.VolunteerService;
 
-@RequestMapping("api/v1/volunteer")
+@RequestMapping("api/v1/volunteers")
 @RestController
 public class VolunteerController {
 
@@ -31,18 +31,18 @@ public class VolunteerController {
     }
 
     @PostMapping
-    public void addVolunteer(@RequestBody Volunteer volunteer) {
-        volunteerService.addVolunteer(volunteer);
+    public void insertVolunteer(@RequestBody Volunteer volunteer) {
+        volunteerService.insertVolunteer(volunteer);
     }
 
     @GetMapping
-    public List<Volunteer> getAllVolunteer() {
-        return volunteerService.getAllVolunteers();
+    public List<Volunteer> selectAllVolunteer() {
+        return volunteerService.selectAllVolunteers();
     }
 
     @GetMapping(path = "{id}")
-    public Volunteer getVolunteerById(@PathVariable("id") UUID id) {
-        return volunteerService.getVolunteerById(id).orElse(null);
+    public Volunteer selectVolunteerById(@PathVariable("id") UUID id) {
+        return volunteerService.selectVolunteerById(id).orElse(null);
     }
 
     @PutMapping(path = "{id}")

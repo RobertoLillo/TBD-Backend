@@ -17,19 +17,19 @@ public class VolunteerService {
     private final VolunteerDao volunteerDao;
 
     @Autowired
-    public VolunteerService(@Qualifier("postgres") VolunteerDao volunteerDao) {
+    public VolunteerService(@Qualifier("postgresVolunteer") VolunteerDao volunteerDao) {
         this.volunteerDao = volunteerDao;
     }
 
-    public int addVolunteer(Volunteer volunteer) {
+    public int insertVolunteer(Volunteer volunteer) {
         return volunteerDao.insertVolunteer(volunteer);
     }
 
-    public List<Volunteer> getAllVolunteers() {
+    public List<Volunteer> selectAllVolunteers() {
         return volunteerDao.selectAllVolunteers();
     }
 
-    public Optional<Volunteer> getVolunteerById(UUID id) {
+    public Optional<Volunteer> selectVolunteerById(UUID id) {
         return volunteerDao.selectVolunteerById(id);
     }
 
