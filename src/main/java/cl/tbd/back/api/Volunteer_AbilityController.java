@@ -22,26 +22,26 @@ import cl.tbd.back.service.Volunteer_AbilityService;
 @RestController
 public class Volunteer_AbilityController {
 
-    private final Volunteer_AbilityService volunteer_abilityService;
+    private final Volunteer_AbilityService volunteer_AbilityService;
 
     @Autowired
-    public Volunteer_AbilityController(@Valid @NonNull Volunteer_AbilityService volunteer_abilityService) {
-        this.volunteer_abilityService = volunteer_abilityService;
+    public Volunteer_AbilityController(@Valid @NonNull Volunteer_AbilityService volunteer_AbilityService) {
+        this.volunteer_AbilityService = volunteer_AbilityService;
     }
 
-    @PostMapping("/api/v1/volunteers_abilities")
+    @PostMapping("/api/v1/volunteersAbilities")
     public void insertVolunteer_Ability(@RequestBody Volunteer_Ability volunteer_ability) {
-        volunteer_abilityService.insertVolunteer_Ability(volunteer_ability);
+        volunteer_AbilityService.insertVolunteer_Ability(volunteer_ability);
     }
 
-    @GetMapping("/api/v1/volunteers_abilities")
+    @GetMapping("/api/v1/volunteersAbilities")
     public List<Volunteer_Ability> selectAllVolunteers_Abilities() {
-        return volunteer_abilityService.selectAllVolunteers_Abilities();
+        return volunteer_AbilityService.selectAllVolunteers_Abilities();
     }
 
-    @DeleteMapping("/api/v1/volunteers_abilities/{id}")
+    @DeleteMapping("/api/v1/volunteersAbilities/{id}")
     public void deleteVolunteer_AbilityById(@PathVariable("id") UUID id) {
-        volunteer_abilityService.deleteVolunteer_AbilityById(id);
+        volunteer_AbilityService.deleteVolunteer_AbilityById(id);
     }
 
 }

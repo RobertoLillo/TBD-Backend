@@ -45,7 +45,7 @@ public class AbilityController {
         return abilityService.selectAbilityById(id).orElse(null);
     }
 
-    @PutMapping("/api/v1/abilities/{id}")
+    @PutMapping("/api/v1/abilities/description/{id}")
     public void updateAbilityDescriptionById(@PathVariable("id") UUID id, @Valid @NonNull Ability ability) {
         abilityService.updateAbilityDescriptionById(id, ability);
     }

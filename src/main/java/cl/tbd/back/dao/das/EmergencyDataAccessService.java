@@ -38,20 +38,24 @@ public class EmergencyDataAccessService implements EmergencyDao {
 
     @Override
     public List<Emergency> selectAllEmergencies() {
-        final String sql = "SELECT id, id_institution, name, description, start_date, finish_date FROM emergencies";
+        final String sql = "SELECT * FROM emergencies";
         try (Connection con = sql2o.open()) {
-            return con.createQuery(sql).executeAndFetch(Emergency.class);
+            return con.createQuery(sql)
+                .executeAndFetch(Emergency.class);
         }
     }
 
     @Override
     public Optional<Emergency> selectEmergencyById(UUID id) {
-        String sql1 = "SELECT id, id_institution, name, description, start_date, finish_date FROM emergencies ";
+        String sql1 = "SELECT * FROM emergencies ";
         String sql2 = "WHERE id = :searchId";
         final String sql = sql1 + sql2;
         try (Connection con = sql2o.open()) {
-            return con.createQuery(sql).addParameter("searchId", id).executeAndFetch(Emergency.class).stream()
-                    .findFirst();
+            return con.createQuery(sql)
+            .addParameter("searchId", id)
+            .executeAndFetch(Emergency.class)
+            .stream()
+            .findFirst();
         }
     }
 
@@ -59,12 +63,10 @@ public class EmergencyDataAccessService implements EmergencyDao {
     public int updateEmergencyNameById(UUID id, Emergency emergency) {
         final String sql = "UPDATE emergencies SET name = :name WHERE id = :id";
         try (Connection con = sql2o.open()) {
-            con.createQuery(sql).addParameter("id", id).addParameter("name", emergency.getName())
-                    // .addParameter("description", emergency.getDescription())
-                    // .addParameter("start_date", emergency.getStart_date())
-                    // .addParameter("finish_date", emergency.getFinish_date())
-                    // .addParameter("id_institution", emergency.getId_institution())
-                    .executeUpdate();
+            con.createQuery(sql)
+                .addParameter("id", id)
+                .addParameter("name", emergency.getName())
+                .executeUpdate();
             return 0;
         }
     }
@@ -73,13 +75,10 @@ public class EmergencyDataAccessService implements EmergencyDao {
     public int updateEmergencyDescriptionById(UUID id, Emergency emergency) {
         final String sql = "UPDATE emergencies SET description = :description WHERE id = :id";
         try (Connection con = sql2o.open()) {
-            con.createQuery(sql).addParameter("id", id)
-                    // .addParameter("name", emergency.getName())
-                    .addParameter("description", emergency.getDescription())
-                    // .addParameter("start_date", emergency.getStart_date())
-                    // .addParameter("finish_date", emergency.getFinish_date())
-                    // .addParameter("id_institution", emergency.getId_institution())
-                    .executeUpdate();
+            con.createQuery(sql)
+                .addParameter("id", id)
+                .addParameter("description", emergency.getDescription())
+                .executeUpdate();
             return 0;
         }
     }
@@ -89,12 +88,8 @@ public class EmergencyDataAccessService implements EmergencyDao {
         final String sql = "UPDATE emergencies SET finish_date = :finish_date WHERE id = :id";
         try (Connection con = sql2o.open()) {
             con.createQuery(sql).addParameter("id", id)
-                    // .addParameter("name", emergency.getName())
-                    // .addParameter("description", emergency.getDescription())
-                    // .addParameter("start_date", emergency.getStart_date())
-                    .addParameter("finish_date", emergency
-                            .getFinishDate())
-                //.addParameter("id_institution", emergency.getId_institution())
+                .addParameter("finish_date", emergency
+                .getFinishDate())
                 .executeUpdate();
             return 0;
         }

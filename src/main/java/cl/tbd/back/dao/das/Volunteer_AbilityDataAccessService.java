@@ -18,13 +18,13 @@ public class Volunteer_AbilityDataAccessService implements Volunteer_AbilityDao 
     private Sql2o sql2o;
 
     @Override
-    public int insertVolunteer_Ability(UUID id, Volunteer_Ability volunteer_ability) {
+    public int insertVolunteer_Ability(UUID id, Volunteer_Ability volunteer_Ability) {
         final String sql = "INSERT INTO volunteers_abilities (id, id_volunteer, id_ability) VALUES (:id, :id_volunteer, :id_ability)";
         try (Connection con = sql2o.open()) {
             con.createQuery(sql)
                 .addParameter("id", id)
-                .addParameter("id_volunteer", volunteer_ability.getId_volunteer())
-                .addParameter("id_ability", volunteer_ability.getId_ability())
+                .addParameter("id_volunteer", volunteer_Ability.getIdVolunteer())
+                .addParameter("id_ability", volunteer_Ability.getIdAbility())
                 .executeUpdate();
             return 0;
         }
@@ -32,7 +32,7 @@ public class Volunteer_AbilityDataAccessService implements Volunteer_AbilityDao 
 
     @Override
     public List<Volunteer_Ability> selectAllVolunteers_Abilities() {
-        final String sql = "SELECT id, id_volunteer, id_ability FROM volunteers_abilities";
+        final String sql = "SELECT * FROM volunteers_abilities";
         try (Connection con = sql2o.open()) {
             return con.createQuery(sql)
                 .executeAndFetch(Volunteer_Ability.class);

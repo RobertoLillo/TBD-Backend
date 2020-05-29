@@ -45,7 +45,7 @@ public class VolunteerController {
         return volunteerService.selectVolunteerById(id).orElse(null);
     }
 
-    @PutMapping("/api/v1/volunteers/{id}")
+    @PutMapping("/api/v1/volunteers/name/{id}")
     public void updateVolunteerNameById(@PathVariable("id") UUID id, @Valid @NonNull Volunteer volunteer) {
         volunteerService.updateVolunteerNameById(id, volunteer);
     }
@@ -61,5 +61,9 @@ public class VolunteerController {
     public List<Volunteer> selectAllVolunteersByAbility(@PathVariable("id") UUID id) {
         return volunteerService.selectAllVolunteersByAbility(id);
     }
-
+    
+    @GetMapping("/api/v1/volunteers/byEmergency/{id}")
+    public List<Volunteer> selectAllVolunteersByEmergency(@PathVariable("id") UUID id) {
+        return volunteerService.selectAllVolunteersByEmergency(id);
+    }
 }

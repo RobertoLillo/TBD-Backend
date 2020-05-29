@@ -32,20 +32,22 @@ public class InstitutionDataAccessService implements InstitutionDao{
 
     @Override
     public List<Institution> selectAllInstitutions() {
-        final String sql = "SELECT id, name FROM institutions";
+        final String sql = "SELECT * FROM institutions";
         try (Connection con = sql2o.open()) {
             return con.createQuery(sql)
-            .executeAndFetch(Institution.class);
+                .executeAndFetch(Institution.class);
         }
     }
 
     @Override
     public Optional<Institution> selectInstitutionById(UUID id) {
-        final String sql = "SELECT id, name FROM institutions WHERE id = :searchId";
+        final String sql = "SELECT * FROM institutions WHERE id = :searchId";
         try (Connection con = sql2o.open()) {
             return con.createQuery(sql)
                 .addParameter("searchId", id)
-                .executeAndFetch(Institution.class).stream().findFirst();
+                .executeAndFetch(Institution.class)
+                .stream()
+                .findFirst();
         }
     }
 

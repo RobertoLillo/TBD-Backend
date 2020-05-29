@@ -32,7 +32,7 @@ public class AbilityDataAccessService implements AbilityDao {
 
     @Override
     public List<Ability> selectAllAbilities() {
-        final String sql = "SELECT id, description FROM abilities";
+        final String sql = "SELECT * FROM abilities";
         try (Connection con = sql2o.open()) {
             return con.createQuery(sql)
                 .executeAndFetch(Ability.class);
@@ -41,11 +41,13 @@ public class AbilityDataAccessService implements AbilityDao {
 
     @Override
     public Optional<Ability> selectAbilityById(UUID id) {
-        final String sql = "SELECT id, description FROM abilities WHERE id = :searchId";
+        final String sql = "SELECT * FROM abilities WHERE id = :searchId";
         try (Connection con = sql2o.open()) {
             return con.createQuery(sql)
                 .addParameter("searchId", id)
-                .executeAndFetch(Ability.class).stream().findFirst();
+                .executeAndFetch(Ability.class)
+                .stream()
+                .findFirst();
         }
     }
 

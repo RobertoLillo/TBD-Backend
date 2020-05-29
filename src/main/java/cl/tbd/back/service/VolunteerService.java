@@ -45,4 +45,8 @@ public class VolunteerService {
         return volunteerDao.selectAllVolunteersByAbility(id);
     }
 
+    public List<Volunteer> selectAllVolunteersByEmergency(UUID id) {
+        return volunteerDao.selectAllVolunteersByEmergency(id);
+    }
+
 }

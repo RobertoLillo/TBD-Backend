@@ -30,7 +30,7 @@ public class TaskDataAccessService implements TaskDao {
                 .addParameter("name", task.getName())
                 .addParameter("description", task.getDescription())
                 .addParameter("required_volunteers", task.getRequiredVolunteers())
-                .addParameter("enrolled_volunteersn", task.getEnrolledVolunteers())
+                .addParameter("enrolled_volunteers", task.getEnrolledVolunteers())
                 .addParameter("start_date", task.getStartDate())
                 .addParameter("finish_date", task.getFinishDate())
                 .executeUpdate();
@@ -40,7 +40,7 @@ public class TaskDataAccessService implements TaskDao {
 
     @Override
     public List<Task> selectAllTasks() {
-        final String sql = "SELECT id, id_emergency, name, description, required_volunteers, enrolled_volunteers, start_date, finish_date FROM tasks";
+        final String sql = "SELECT * FROM tasks";
         try (Connection con = sql2o.open()) {
             return con.createQuery(sql)
                 .executeAndFetch(Task.class);
@@ -49,13 +49,15 @@ public class TaskDataAccessService implements TaskDao {
 
     @Override
     public Optional<Task> selectTaskById(UUID id) {
-        String sql1 = "SELECT id, id_emergency, name, description, required_volunteers, enrolled_volunteers, start_date, finish_date FROM tasks ";
+        String sql1 = "SELECT * FROM tasks ";
         String sql2 = "WHERE id = :searchId";
         final String sql = sql1 + sql2;
         try (Connection con = sql2o.open()) {
             return con.createQuery(sql)
                 .addParameter("searchId", id)
-                .executeAndFetch(Task.class).stream().findFirst();
+                .executeAndFetch(Task.class)
+                .stream()
+                .findFirst();
         }
     }
 
@@ -85,11 +87,11 @@ public class TaskDataAccessService implements TaskDao {
 
     @Override
     public int updateTaskRequieredVolunteersById(UUID id, Task task) {
-        final String sql = "UPDATE tasks SET required_volunteers = :requiredVolunteers WHERE id = :id";
+        final String sql = "UPDATE tasks SET required_volunteers = :required_volunteers WHERE id = :id";
         try (Connection con = sql2o.open()) {
             con.createQuery(sql)
                 .addParameter("id", id)
-                .addParameter("requiredVolunteers", task.getRequiredVolunteers())
+                .addParameter("required_volunteers", task.getRequiredVolunteers())
                 .executeUpdate();
             return 0;
         }
@@ -97,11 +99,11 @@ public class TaskDataAccessService implements TaskDao {
 
     @Override
     public int updateTaskFinishDateById(UUID id, Task task) {
-        final String sql = "UPDATE tasks SET finish_date = :finishDate WHERE id = :id";
+        final String sql = "UPDATE tasks SET finish_date = :finish_date WHERE id = :id";
         try (Connection con = sql2o.open()) {
             con.createQuery(sql)
                 .addParameter("id", id)
-                .addParameter("finishDate", task.getFinishDate())
+                .addParameter("finish_date", task.getFinishDate())
                 .executeUpdate();
             return 0;
         }

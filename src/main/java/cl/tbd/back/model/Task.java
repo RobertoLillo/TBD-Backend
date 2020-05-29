@@ -1,6 +1,6 @@
 package cl.tbd.back.model;
 
-import java.sql.Timestamp;
+import java.sql.Date;
 import java.util.UUID;
 
 import javax.validation.constraints.NotBlank;
@@ -12,7 +12,7 @@ public class Task {
     private final UUID id;
 
     @NotBlank
-    private final UUID idEmergency;
+    private final UUID id_emergency;
 
     @NotBlank
     private final String name;
@@ -20,31 +20,31 @@ public class Task {
     private final String description;
     
     @NotBlank
-    private final int requiredVolunteers;
+    private final int required_volunteers;
 
-    private final int enrolledVolunteers;
+    private final int enrolled_volunteers;
 
     @NotBlank
-    private final Timestamp startDate;
+    private final Date start_date;
 
-    private final Timestamp finishDate;
+    private final Date finish_date;
 
     public Task(@JsonProperty("id") UUID id,
-                @JsonProperty("idEmergency") UUID idEmergency,
+                @JsonProperty("id_emergency") UUID id_emergency,
                 @JsonProperty("name") String name,
                 @JsonProperty("description") String description,
-                @JsonProperty("requiredVolunteers") int requiredVolunteers,
-                @JsonProperty("enrolledVolunteers") int enrolledVolunteers,
-                @JsonProperty("startDate") Timestamp startDate,
-                @JsonProperty("finishDate") Timestamp finishDate) {
+                @JsonProperty("required_volunteers") int required_volunteers,
+                @JsonProperty("enrolled_volunteers") int enrolled_volunteers,
+                @JsonProperty("start_date") Date start_date,
+                @JsonProperty("finish_date") Date finish_date) {
         this.id = id;
-        this.idEmergency = idEmergency;
+        this.id_emergency = id_emergency;
         this.name = name;
         this.description = description;
-        this.requiredVolunteers = requiredVolunteers;
-        this.enrolledVolunteers = enrolledVolunteers;
-        this.startDate = startDate;
-        this.finishDate = finishDate;
+        this.required_volunteers = required_volunteers;
+        this.enrolled_volunteers = enrolled_volunteers;
+        this.start_date = start_date;
+        this.finish_date = finish_date;
     }
 
     public UUID getId() {
@@ -52,7 +52,7 @@ public class Task {
     }
 
     public UUID getIdEmergency() {
-        return idEmergency;
+        return id_emergency;
     }
 
     public String getName() {
@@ -64,19 +64,19 @@ public class Task {
     }
 
     public int getRequiredVolunteers() {
-        return requiredVolunteers;
+        return required_volunteers;
     }
 
     public int getEnrolledVolunteers() {
-        return enrolledVolunteers;
+        return enrolled_volunteers;
     }
 
-    public Timestamp getStartDate() {
-        return startDate;
+    public Date getStartDate() {
+        return start_date;
     }
 
-    public Timestamp getFinishDate() {
-        return finishDate;
+    public Date getFinishDate() {
+        return finish_date;
     }
 
 }

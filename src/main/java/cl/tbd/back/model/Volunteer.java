@@ -13,7 +13,8 @@ public class Volunteer {
     @NotBlank
     private final String name;
 
-    public Volunteer(@JsonProperty("id") UUID id, @JsonProperty("name") String name) {
+    public Volunteer(@JsonProperty("id") UUID id,
+                     @JsonProperty("name") String name) {
         this.id = id;
         this.name = name;
     }

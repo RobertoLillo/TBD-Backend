@@ -13,12 +13,13 @@ public class Ability {
     @NotBlank
     private final String description;
 
-    public Ability(@JsonProperty("id") UUID id, @JsonProperty("description") String description) {
+    public Ability(@JsonProperty("id") UUID id,
+                   @JsonProperty("description") String description) {
         this.id = id;
         this.description = description;
     }
 
-    public UUID getID() {
+    public UUID getId() {
         return id;
     }
 

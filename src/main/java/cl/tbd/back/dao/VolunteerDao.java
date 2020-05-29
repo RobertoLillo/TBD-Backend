@@ -25,4 +25,6 @@ public interface VolunteerDao {
 
     List<Volunteer> selectAllVolunteersByAbility(UUID idAbility);
 
+    List<Volunteer> selectAllVolunteersByEmergency(UUID idEmergency);
+
 }

@@ -1,6 +1,6 @@
 package cl.tbd.back.model;
 
-import java.sql.Timestamp;
+import java.sql.Date;
 import java.util.UUID;
 
 import javax.validation.constraints.NotBlank;
@@ -12,7 +12,7 @@ public class Emergency {
     private final UUID id;
 
     @NotBlank
-    private final UUID idInstitution;
+    private final UUID id_institution;
 
     @NotBlank
     private final String name;
@@ -20,26 +20,30 @@ public class Emergency {
     private final String description;
 
     @NotBlank
-    private final Timestamp startDate;
+    private final Date start_date;
 
-    private final Timestamp finishDate;
+    private final Date finish_date;
 
     public Emergency(@JsonProperty("id") UUID id,
-                     @JsonProperty("id_institution") UUID idInstitution,
+                     @JsonProperty("id_institution") UUID id_institution,
                      @JsonProperty("name") String name,
                      @JsonProperty("description") String description,
-                     @JsonProperty("startDate") Timestamp startDate,
-                     @JsonProperty("finishDate") Timestamp finishDate) {
+                     @JsonProperty("start_date") Date start_date,
+                     @JsonProperty("finish_date") Date finish_date) {
         this.id = id;
-        this.idInstitution = idInstitution;
+        this.id_institution = id_institution;
         this.name = name;
         this.description = description;
-        this.startDate = startDate;
-        this.finishDate = finishDate;
+        this.start_date = start_date;
+        this.finish_date = finish_date;
     }
 
-    public UUID getID() {
+    public UUID getId() {
         return id;
+    }
+
+    public UUID getIdInstitution() {
+        return id_institution;
     }
 
     public String getName() {
@@ -50,15 +54,12 @@ public class Emergency {
         return description;
     }
 
-    public Timestamp getStartDate() {
-        return startDate;
+    public Date getStartDate() {
+        return start_date;
     }
 
-    public Timestamp getFinishDate() {
-        return finishDate;
+    public Date getFinishDate() {
+        return finish_date;
     }
-
-    public UUID getIdInstitution() {
-        return idInstitution;
-    }
+    
 }

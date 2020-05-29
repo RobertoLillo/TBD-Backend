@@ -13,23 +13,23 @@ import cl.tbd.back.model.Volunteer_Ability;
 @Service
 public class Volunteer_AbilityService {
 
-    private final Volunteer_AbilityDao volunteer_abilityDao;
+    private final Volunteer_AbilityDao volunteer_AbilityDao;
 
     @Autowired
-    public Volunteer_AbilityService(@Qualifier("postgresVolunteer_Ability") Volunteer_AbilityDao volunteer_abilityDao) {
-        this.volunteer_abilityDao = volunteer_abilityDao;
+    public Volunteer_AbilityService(@Qualifier("postgresVolunteer_Ability") Volunteer_AbilityDao volunteer_AbilityDao) {
+        this.volunteer_AbilityDao = volunteer_AbilityDao;
     }
 
-    public int insertVolunteer_Ability(Volunteer_Ability volunteer_ability) {
-        return volunteer_abilityDao.insertVolunteer_Ability(volunteer_ability);
+    public int insertVolunteer_Ability(Volunteer_Ability volunteerAbility) {
+        return volunteer_AbilityDao.insertVolunteer_Ability(volunteerAbility);
     }
 
     public List<Volunteer_Ability> selectAllVolunteers_Abilities() {
-        return volunteer_abilityDao.selectAllVolunteers_Abilities();
+        return volunteer_AbilityDao.selectAllVolunteers_Abilities();
     }
 
     public int deleteVolunteer_AbilityById(UUID id) {
-        return volunteer_abilityDao.deleteVolunteer_AbilityById(id);
+        return volunteer_AbilityDao.deleteVolunteer_AbilityById(id);
     }
 
 }

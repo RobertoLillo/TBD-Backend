@@ -13,12 +13,13 @@ public class Institution {
     @NotBlank
     private final String name;
 
-    public Institution(@JsonProperty("id") UUID id, @JsonProperty("name") String name) {
+    public Institution(@JsonProperty("id") UUID id,
+                       @JsonProperty("name") String name) {
         this.id = id;
         this.name = name;
     }
 
-    public UUID getID() {
+    public UUID getId() {
         return id;
     }
 

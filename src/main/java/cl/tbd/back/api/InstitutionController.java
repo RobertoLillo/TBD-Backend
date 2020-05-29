@@ -45,7 +45,7 @@ public class InstitutionController {
         return institutionService.selectInstitutionById(id).orElse(null);
     }
 
-    @PutMapping("/api/v1/institutions/{id}")
+    @PutMapping("/api/v1/institutions/name/{id}")
     public void updateInstitutionNameById(@PathVariable("id") UUID id, @Valid @NonNull Institution institution) {
         institutionService.updateInstitutionNameById(id, institution);
     }
