@@ -70,7 +70,7 @@ public class VolunteerDataAccessService implements VolunteerDao{
 
     @Override
     public List<Volunteer> selectAllVolunteersByAbility(UUID idAbility) {
-        String sql1 = "SELECT id, name FROM volunteers ";
+        String sql1 = "SELECT DISTINCT id, name FROM volunteers ";
         String sql2 = "INNER JOIN ";
         String sql3 = "(SELECT id_volunteer FROM volunteers_abilities WHERE id_ability = :id_ability) AS vol_abi ";
         String sql4 = "ON volunteers.id = vol_abi.id_volunteer";
@@ -84,12 +84,12 @@ public class VolunteerDataAccessService implements VolunteerDao{
     
     @Override
     public List<Volunteer> selectAllVolunteersByEmergency(UUID idEmergency) {
-        String sql1 = "SELECT id, name FROM volunteers ";
+        String sql1 = "SELECT DISTINCT id, name FROM volunteers ";
         String sql2 = "INNER JOIN ";
             String sql3 = "(SELECT id_volunteer, id_task FROM rankings ";
             String sql4 = "INNER JOIN ";
                 String sql5 = "(SELECT id FROM tasks WHERE id_emergency = :id_emergency) AS tas ";
-            String sql6 = "ON rankings.id_task = tas.id) as ran ";
+            String sql6 = "ON rankings.id_task = tas.id AND flag_participated = true) as ran ";
         String sql7 = "ON volunteers.id = ran.id_volunteer";
         final String sql = sql1 + sql2 + sql3 +sql4 + sql5 + sql6 + sql7;
         try (Connection con = sql2o.open()) {
