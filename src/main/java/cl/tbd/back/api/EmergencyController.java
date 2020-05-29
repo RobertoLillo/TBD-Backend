@@ -56,7 +56,7 @@ public class EmergencyController {
     }
 
     @PutMapping("/api/v1/emergencies/finish/{id}")
-    public void updateEmergencyFinish_dateById(@PathVariable("id") UUID id, @Valid @NonNull Emergency emergency) {
+    public void updateEmergencyFinishDateById(@PathVariable("id") UUID id, @Valid @NonNull Emergency emergency) {
         emergencyService.updateEmergencyFinish_dateById(id, emergency);
     }
 

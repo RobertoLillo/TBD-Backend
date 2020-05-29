@@ -24,7 +24,7 @@ public class AbilityDataAccessService implements AbilityDao {
         try (Connection con = sql2o.open()) {
             con.createQuery(sql)
                 .addParameter("id", id)
-                .addParameter("description", ability.getName())
+                .addParameter("description", ability.getDescription())
                 .executeUpdate();
             return 0;
         }
@@ -55,7 +55,7 @@ public class AbilityDataAccessService implements AbilityDao {
         try (Connection con = sql2o.open()) {
             con.createQuery(sql)
                 .addParameter("id", id)
-                .addParameter("description", ability.getName())
+                .addParameter("description", ability.getDescription())
                 .executeUpdate();
             return 0;
         }

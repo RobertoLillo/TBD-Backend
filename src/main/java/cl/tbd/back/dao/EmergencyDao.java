@@ -23,7 +23,7 @@ public interface EmergencyDao {
 
     int updateEmergencyDescriptionById(UUID id, Emergency emergency);
 
-    int updateEmergencyFinish_dateById(UUID id, Emergency emergency);
+    int updateEmergencyFinishDateById(UUID id, Emergency emergency);
 
     int deleteEmergencyById(UUID id);
 

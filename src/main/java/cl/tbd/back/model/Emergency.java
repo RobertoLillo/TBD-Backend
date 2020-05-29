@@ -11,29 +11,31 @@ public class Emergency {
 
     private final UUID id;
 
-    private final UUID id_institution;
+    @NotBlank
+    private final UUID idInstitution;
 
     @NotBlank
     private final String name;
 
     private final String description;
 
-    private final Timestamp start_date;
+    @NotBlank
+    private final Timestamp startDate;
 
-    private final Timestamp finish_date;
+    private final Timestamp finishDate;
 
     public Emergency(@JsonProperty("id") UUID id,
-        @JsonProperty("name") String name,
-        @JsonProperty("description") String description,
-        @JsonProperty("start_date") Timestamp start_date,
-        @JsonProperty("finish_date") Timestamp finish_date,
-        @JsonProperty("id_institution") UUID id_institution) {
+                     @JsonProperty("id_institution") UUID idInstitution,
+                     @JsonProperty("name") String name,
+                     @JsonProperty("description") String description,
+                     @JsonProperty("startDate") Timestamp startDate,
+                     @JsonProperty("finishDate") Timestamp finishDate) {
         this.id = id;
+        this.idInstitution = idInstitution;
         this.name = name;
         this.description = description;
-        this.start_date = start_date;
-        this.finish_date = finish_date;
-        this.id_institution = id_institution;
+        this.startDate = startDate;
+        this.finishDate = finishDate;
     }
 
     public UUID getID() {
@@ -48,15 +50,15 @@ public class Emergency {
         return description;
     }
 
-    public Timestamp getStart_date() {
-        return start_date;
+    public Timestamp getStartDate() {
+        return startDate;
     }
 
-    public Timestamp getFinish_date() {
-        return finish_date;
+    public Timestamp getFinishDate() {
+        return finishDate;
     }
 
-    public UUID getId_institution() {
-        return id_institution;
+    public UUID getIdInstitution() {
+        return idInstitution;
     }
 }

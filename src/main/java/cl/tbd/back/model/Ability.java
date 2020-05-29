@@ -22,7 +22,7 @@ public class Ability {
         return id;
     }
 
-    public String getName() {
+    public String getDescription() {
         return description;
     }
 

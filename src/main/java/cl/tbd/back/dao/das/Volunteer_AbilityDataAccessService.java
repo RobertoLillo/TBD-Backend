@@ -41,7 +41,6 @@ public class Volunteer_AbilityDataAccessService implements Volunteer_AbilityDao 
 
     @Override
     public int deleteVolunteer_AbilityById(UUID id) {
-        // TODO Auto-generated method stub
         return 0;
     }
 

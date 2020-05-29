@@ -42,7 +42,7 @@ public class EmergencyService {
     }
 
     public int updateEmergencyFinish_dateById(UUID id, Emergency emergency) {
-        return emergencyDao.updateEmergencyFinish_dateById(id, emergency);
+        return emergencyDao.updateEmergencyFinishDateById(id, emergency);
     }
 
     public int deleteEmergencyById(UUID id) {

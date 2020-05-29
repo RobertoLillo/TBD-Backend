@@ -26,13 +26,13 @@ public class AbilityController {
     private final AbilityService abilityService;
 
     @Autowired
-    public AbilityController(@Valid @NonNull AbilityService volunteerService) {
-        this.abilityService = volunteerService;
+    public AbilityController(@Valid @NonNull AbilityService abilityService) {
+        this.abilityService = abilityService;
     }
 
     @PostMapping("/api/v1/abilities")
-    public void insertAbility(@RequestBody Ability volunteer) {
-        abilityService.insertAbility(volunteer);
+    public void insertAbility(@RequestBody Ability ability) {
+        abilityService.insertAbility(ability);
     }
 
     @GetMapping("/api/v1/abilities")
@@ -46,8 +46,8 @@ public class AbilityController {
     }
 
     @PutMapping("/api/v1/abilities/{id}")
-    public void updateAbilityNameById(@PathVariable("id") UUID id, @Valid @NonNull Ability volunteer) {
-        abilityService.updateAbilityDescriptionById(id, volunteer);
+    public void updateAbilityDescriptionById(@PathVariable("id") UUID id, @Valid @NonNull Ability ability) {
+        abilityService.updateAbilityDescriptionById(id, ability);
     }
 
     @DeleteMapping("/api/v1/abilities/{id}")
