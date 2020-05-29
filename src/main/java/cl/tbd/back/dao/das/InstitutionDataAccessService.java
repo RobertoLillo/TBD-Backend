@@ -65,7 +65,13 @@ public class InstitutionDataAccessService implements InstitutionDao{
 
     @Override
     public int deleteInstitutionById(UUID id) {
-        return 0;
+        final String sql = "DELETE FROM institutions WHERE id = :id";
+        try (Connection con = sql2o.open()) {
+            con.createQuery(sql)
+                .addParameter("id", id)
+                .executeUpdate();
+            return 0;
+        }
     }
 
 }

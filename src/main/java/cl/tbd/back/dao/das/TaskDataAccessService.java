@@ -111,7 +111,13 @@ public class TaskDataAccessService implements TaskDao {
 
     @Override
     public int deleteTaskById(UUID id) {
-        return 0;
+        final String sql = "DELETE FROM tasks WHERE id = :id";
+        try (Connection con = sql2o.open()) {
+            con.createQuery(sql)
+                .addParameter("id", id)
+                .executeUpdate();
+            return 0;
+        }
     }
     
 }

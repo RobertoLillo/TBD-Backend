@@ -41,7 +41,13 @@ public class Volunteer_AbilityDataAccessService implements Volunteer_AbilityDao 
 
     @Override
     public int deleteVolunteer_AbilityById(UUID id) {
-        return 0;
+        final String sql = "DELETE FROM volunteers_abilities WHERE id = :id";
+        try (Connection con = sql2o.open()) {
+            con.createQuery(sql)
+                .addParameter("id", id)
+                .executeUpdate();
+            return 0;
+        }
     }
 
 }

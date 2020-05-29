@@ -65,7 +65,13 @@ public class AbilityDataAccessService implements AbilityDao {
 
     @Override
     public int deleteAbilityById(UUID id) {
-        return 0;
+        final String sql = "DELETE FROM abilities WHERE id = :id";
+        try (Connection con = sql2o.open()) {
+            con.createQuery(sql)
+                .addParameter("id", id)
+                .executeUpdate();
+            return 0;
+        }
     }
 
 }

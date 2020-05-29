@@ -83,7 +83,13 @@ public class RankingDataAccessService implements RankingDao {
 
     @Override
     public int deleteRankingById(UUID id) {
-        return 0;
+        final String sql = "DELETE FROM rankings WHERE id = :id";
+        try (Connection con = sql2o.open()) {
+            con.createQuery(sql)
+                .addParameter("id", id)
+                .executeUpdate();
+            return 0;
+        }
     }
     
 }
