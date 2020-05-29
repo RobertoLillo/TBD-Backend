@@ -28,7 +28,7 @@ public class Ranking {
                    @JsonProperty("id_volunteer") UUID id_volunteer,
                    @JsonProperty("id_task") UUID id_task,
                    @JsonProperty("score") int score,
-                   @JsonProperty("flagInvited") boolean flag_invited,
+                   @JsonProperty("flag_invited") boolean flag_invited,
                    @JsonProperty("flag_participated") boolean flag_participated) {
         this.id = id;
         this.id_volunteer = id_volunteer;

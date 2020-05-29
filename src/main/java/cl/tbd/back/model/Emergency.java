@@ -19,7 +19,6 @@ public class Emergency {
 
     private final String description;
 
-    @NotBlank
     private final Date start_date;
 
     private final Date finish_date;
