@@ -66,12 +66,12 @@ CREATE TABLE tasks
 CREATE TABLE rankings
 (
     id UUID NOT NULL,
-    id_voluunter UUID NOT NULL,
+    id_volunteer UUID NOT NULL,
     id_task UUID NOT NULL,
     score INTEGER,
     flag_invited BOOLEAN NOT NULL,
     flag_participated BOOLEAN,
     PRIMARY KEY (id),
-    FOREIGN KEY (id_voluunter) REFERENCES volunteers (id),
+    FOREIGN KEY (id_volunteer) REFERENCES volunteers (id),
     FOREIGN KEY (id_task) REFERENCES tasks (id)
 );
