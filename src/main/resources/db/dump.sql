@@ -1,3 +1,86 @@
+-------------------------------TABLES-------------------------------
+
+DROP TABLE IF EXISTS rankings;
+DROP TABLE IF EXISTS tasks;
+DROP TABLE IF EXISTS emergencies;
+DROP TABLE IF EXISTS institutions;
+DROP TABLE IF EXISTS volunteers_abilities;
+DROP TABLE IF EXISTS abilities;
+DROP TABLE IF EXISTS volunteers;
+
+CREATE TABLE volunteers
+(
+    id UUID NOT NULL,
+    name VARCHAR(100),
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE abilities
+(
+    id UUID NOT NULL,
+    description VARCHAR(250),
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE volunteers_abilities
+(
+    id UUID NOT NULL,
+    id_volunteer UUID NOT NULL,
+    id_ability UUID NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (id_volunteer) REFERENCES volunteers (id),
+    FOREIGN KEY (id_ability) REFERENCES abilities (id)
+);
+
+CREATE TABLE institutions
+(
+    id UUID NOT NULL,
+    name VARCHAR(100),
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE emergencies
+(
+    id UUID NOT NULL,
+    id_institution UUID NOT NULL,
+    name VARCHAR(100) NOT NULL,
+    description VARCHAR(250),
+    start_date DATE NOT NULL,
+    finish_date DATE,
+    PRIMARY KEY (id),
+    FOREIGN KEY (id_institution) REFERENCES institutions (id)
+);
+
+CREATE TABLE tasks
+(
+    id UUID NOT NULL,
+    id_emergency UUID NOT NULL,
+    name VARCHAR(100) NOT NULL,
+    description VARCHAR(250),
+    required_volunteers INTEGER NOT NULL,
+    enrolled_volunteers INTEGER,
+    start_date DATE NOT NULL,
+    finish_date DATE,
+    PRIMARY KEY (id),
+    FOREIGN KEY (id_emergency) REFERENCES emergencies (id)
+);
+
+CREATE TABLE rankings
+(
+    id UUID NOT NULL,
+    id_volunteer UUID NOT NULL,
+    id_task UUID NOT NULL,
+    score INTEGER,
+    flag_invited BOOLEAN NOT NULL,
+    flag_participated BOOLEAN,
+    PRIMARY KEY (id),
+    FOREIGN KEY (id_volunteer) REFERENCES volunteers (id),
+    FOREIGN KEY (id_task) REFERENCES tasks (id)
+);
+
+---------------------------------VALUES---------------------------------
+
+
 -------------------------------VOLUNTEERS-------------------------------
 
 INSERT INTO volunteers VALUES ('4a995f8c-a3a5-11ea-bb37-0242ac130002', 'Claudia Castillo');
@@ -220,7 +303,7 @@ INSERT INTO emergencies VALUES ('ae844b30-d52b-11ea-87d0-0242ac130003', 'f6ff2e8
 
 INSERT INTO emergencies VALUES ('ae844bf8-d52b-11ea-87d0-0242ac130003', 'f6ff2bf8-a3af-11ea-bb37-0242ac130002', 'Se necesita gente que ayude a alimentar perros de la USACH', 'Se necesita gente que pueda acercarse a la USACH y alimentar a los perros a cargo de AEDA', '2020-08-11', '2020-08-25');
 
--------------------------------TASK-------------------------------
+----------------------------------TASK----------------------------------
 
 INSERT INTO tasks VALUES ('a1c65d8c-d5af-11ea-87d0-0242ac130003', 'ae844504-d52b-11ea-87d0-0242ac130003', 'LLevar materiales', 'Se necesita ayuda para el traslado de los materiales a la zona de construccion', '4', '4', '2020-06-12', '2020-06-13');
 
@@ -367,3 +450,39 @@ INSERT INTO rankings VALUES ('ea00dc5a-db61-11ea-87d0-0242ac130003', '4a996cac-a
 INSERT INTO rankings VALUES ('ea00de30-db61-11ea-87d0-0242ac130003', '4a996d6a-a3a5-11ea-bb37-0242ac130002', 'a1c669bc-d5af-11ea-87d0-0242ac130003', '5', 'TRUE', 'TRUE');
 
 INSERT INTO rankings VALUES ('ea00def8-db61-11ea-87d0-0242ac130003', '4a996ee6-a3a5-11ea-bb37-0242ac130002', 'a1c669bc-d5af-11ea-87d0-0242ac130003', '5', 'TRUE', 'TRUE');
+
+
+----------------------------TRIGGERS--------------------------------
+/* Emergencies trigger */
+/* Asigna la fecha actual a la nueva emergencia ingresada. */
+CREATE OR REPLACE FUNCTION emergency_start_date() RETURNS TRIGGER AS
+$BODY$
+BEGIN
+    NEW.start_date = CURRENT_DATE;
+    RETURN NEW;
+END;
+$BODY$ LANGUAGE plpgsql;
+
+CREATE TRIGGER emergency_date_trigger
+BEFORE INSERT ON emergencies
+FOR EACH ROW
+EXECUTE PROCEDURE emergency_start_date();
+
+
+/* Tasks trigger */
+/* Suma 1 a la cantidad de voluntarios participantes en la tarea específica. */
+CREATE OR REPLACE FUNCTION add_enrolled_volunteer() RETURNS TRIGGER AS
+$BODY$
+BEGIN
+    IF NEW.flag_participated = true THEN
+        UPDATE tasks SET enrolled_volunteers = enrolled_volunteers + 1
+        WHERE id = NEW.id_task;
+    END IF;
+    RETURN NEW;
+END;
+$BODY$ LANGUAGE plpgsql;
+
+CREATE TRIGGER new_enrolled_volunteer
+AFTER INSERT ON rankings
+FOR EACH ROW
+EXECUTE PROCEDURE add_enrolled_volunteer();
