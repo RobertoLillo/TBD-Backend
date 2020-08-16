@@ -13,7 +13,8 @@ https://github.com/aaberg/sql2o/wiki
 
 ## Base de datos
 ```
-1) En el directorio TBD-Backend/src/main/resources se encuentra el archivo application.properties. En este se debe indicar la dirección de la base de datos (por defecto viene configurado para localhost o 127.0.0.1).
+1) En el directorio TBD-Backend/src/main/resources se encuentra el archivo application.properties.
+En este se debe indicar la dirección de la base de datos (por defecto viene configurado para localhost o 127.0.0.1).
 
 2) Dentro del directorio TBD-Backend/src/main/resources/db se encuentran 2 archivos:
 
